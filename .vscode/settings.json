@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.tcc": "cpp",
+        "thread": "cpp",
+        "iostream": "cpp",
+        "iosfwd": "cpp",
+        "memory": "cpp",
+        "ostream": "cpp"
+    }
+}
