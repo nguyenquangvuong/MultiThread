@@ -10,7 +10,7 @@ Modified:
 <Name>
 <Date>
 <Change>
-Released: 12-8-2022
+Released: 30-3-2022
 Description:
 Note: <Note>
 ********************************************************************************/
@@ -74,64 +74,3 @@ int main()
   
     return 0; 
 } 
-
-/**
-#include <stdio.h>
-#include <opencv2/opencv.hpp>
-#include <iostream>
-#include <pthread.h>
-
-using namespace cv;
-using namespace std;
-
-#define Ten_Window "VuongNQb"
-
-//GLOBALS
-VideoCapture vcap;
-Mat frame;
-pthread_mutex_t frameLocker;
-
-const string videoStreamAddress = "rtsp://admin:Taybacaa666@batbienthuydung.ddns.net:554/profile1/live";
-
-void *UpdateFrame(void *arg)
-{
-    for(;;)
-    {
-        Mat tempFrame;
-        vcap >> tempFrame;
-        pthread_mutex_lock(&frameLocker);
-        frame = tempFrame;
-        pthread_mutex_unlock(&frameLocker);
-    }
-}
-
-
-int main(int, char**) { 
-    vcap.open(videoStreamAddress);
-
-    pthread_mutex_init(&frameLocker,NULL);  
-    pthread_t UpdThread;    
-    pthread_create(&UpdThread,     //so thread
-                    NULL,          //Cac thuoc tinh cai dat
-                    UpdateFrame,   //Con tro chinh thuc hien
-                    NULL);         //Tham so truyen vao threa neu khong co de NULL
-
-    for(;;)
-    {
-        namedWindow(Ten_Window , cv::WINDOW_NORMAL);//VuongNQb
-        Mat currentFrame;
-
-        pthread_mutex_lock(&frameLocker);
-        currentFrame = frame;
-        pthread_mutex_unlock(&frameLocker);
-
-        if(currentFrame.empty()){
-            printf("recieved empty frame\n");
-            continue;
-        }
-        imshow(Ten_Window , currentFrame);
-        waitKey(1);
-    }
-}
-//Mat(height, width, CV_8UC3, Scalar(0, 0, 0));  Mat(500, 1000, CV_8UC3, Scalar(0, 0, 0))
-*/
